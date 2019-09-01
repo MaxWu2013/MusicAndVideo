@@ -62,5 +62,4 @@ public class MainActivityModel extends BaseObservable{
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
-
 }

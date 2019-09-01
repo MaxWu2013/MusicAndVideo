@@ -54,13 +54,17 @@
                         android:id="@+id/radioButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="My Music" />
+                        android:checked="@{playerModel.selectedMusic}"
+                        android:text="My Music"
+                        android:onClick="@{playerModel.onMusicClick()}"/>
 
                     <RadioButton
                         android:id="@+id/radioButton2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="My Vedio" />
+                        android:text="My Vedio"
+                        android:checked="@{!playerModel.selectedMusic}"
+                        android:onClick="@{playerModel.onVideoClick()}"/>
                 </RadioGroup>
 
             </LinearLayout>

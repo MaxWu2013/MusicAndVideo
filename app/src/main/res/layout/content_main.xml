@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="contentMainModel"
+            type="com.example.musicandvideo.viewmodel.ContentMainModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

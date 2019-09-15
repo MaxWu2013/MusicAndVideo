@@ -1,13 +1,16 @@
 package com.example.musicandvideo.model;
 
 
+import android.util.Log;
+import android.view.View;
+
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.BindingAdapter;
+
 
 public class PlayerModel extends BaseObservable{
     boolean selectedMusic = true;
-
+    public static final String TAG = "PlayModel";
 
 
     @Bindable
@@ -19,13 +22,21 @@ public class PlayerModel extends BaseObservable{
         this.selectedMusic = selectedMusic;
     }
 
-    @BindingAdapter("android:onClick")
-    public void onMusicClick(){
-        this.selectedMusic = true;
+    public void onMusicClick(View view){
+
+        if(!this.selectedMusic){
+            this.selectedMusic = true;
+            notifyPropertyChanged(com.example.musicandvideo.BR.selectedMusic);
+        }
+        Log.i(TAG, "onMusicClick:"+this.selectedMusic);
     }
-    @BindingAdapter("android:onClick")
-    public void onVideoClick(){
-        this.selectedMusic = false;
+
+    public void onVideoClick(View view){
+        if(this.selectedMusic){
+            this.selectedMusic = false;
+            notifyPropertyChanged(com.example.musicandvideo.BR.selectedMusic);
+        }
+        Log.i(TAG, "onVideoClick:"+this.selectedMusic);
     }
 
 }

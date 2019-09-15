@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:checked="@{playerModel.selectedMusic}"
                         android:text="My Music"
-                        android:onClick="@{playerModel.onMusicClick()}"/>
+                        android:onClick="@{playerModel::onMusicClick}"/>
 
                     <RadioButton
                         android:id="@+id/radioButton2"
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:text="My Vedio"
                         android:checked="@{!playerModel.selectedMusic}"
-                        android:onClick="@{playerModel.onVideoClick()}"/>
+                        android:onClick="@{playerModel::onVideoClick}"/>
                 </RadioGroup>
 
             </LinearLayout>

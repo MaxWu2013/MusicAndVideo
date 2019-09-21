@@ -1,5 +1,6 @@
 package com.example.musicandvideo.view;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +14,8 @@ import com.example.musicandvideo.R;
 import com.example.musicandvideo.databinding.ActivityMainBinding;
 import com.example.musicandvideo.viewmodel.MainActivityModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        PlayListFragment.OnFragmentInteractionListener{
 
     private ActivityMainBinding binding;
     private MainActivityModel mainActivityMode;
@@ -62,5 +64,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPlayListFragmentInteraction(Uri uri) {
+
     }
 }

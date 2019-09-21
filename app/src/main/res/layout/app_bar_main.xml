@@ -23,9 +23,16 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include
-            android:id="@+id/contentMainLayout"
-            layout="@layout/content_main" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentContainer">
+            <fragment
+                android:tag="com.example.musicandvideo.view.PlayListFragment"
+                android:name="com.example.musicandvideo.view.PlayListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

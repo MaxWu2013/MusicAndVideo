@@ -8,9 +8,6 @@
         <variable
             name="mainModel"
             type="com.example.musicandvideo.viewmodel.MainActivityModel" />
-        <variable
-            name="playerModel"
-            type="com.example.musicandvideo.model.PlayerModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -24,9 +21,7 @@
             android:id="@+id/appBarMain"
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            bind:playerModel="@{playerModel}"
-            bind:appbarMainModel="@{mainModel.appBarMainModel}"/>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -54,17 +49,17 @@
                         android:id="@+id/radioButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:checked="@{playerModel.selectedMusic}"
+                        android:checked="@{mainModel.selectedMusic}"
                         android:text="My Music"
-                        android:onClick="@{playerModel::onMusicClick}"/>
+                        android:onClick="@{mainModel::onMusicClick}"/>
 
                     <RadioButton
                         android:id="@+id/radioButton2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="My Vedio"
-                        android:checked="@{!playerModel.selectedMusic}"
-                        android:onClick="@{playerModel::onVideoClick}"/>
+                        android:checked="@{!mainModel.selectedMusic}"
+                        android:onClick="@{mainModel::onVideoClick}"/>
                 </RadioGroup>
 
             </LinearLayout>

@@ -11,13 +11,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.musicandvideo.R;
 import com.example.musicandvideo.databinding.ActivityMainBinding;
-import com.example.musicandvideo.model.PlayerModel;
 import com.example.musicandvideo.viewmodel.MainActivityModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private PlayerModel playerModel;
     private MainActivityModel mainActivityMode;
 
     @Override
@@ -26,13 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
-        playerModel = new PlayerModel();
         mainActivityMode = new MainActivityModel(this);
 
-        binding.setPlayerModel(playerModel);
         binding.setMainModel(mainActivityMode);
 
-        mainActivityMode.init(binding,playerModel);
+        mainActivityMode.init(binding);
 
     }
 

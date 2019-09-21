@@ -1,6 +1,7 @@
 package com.example.musicandvideo.viewmodel;
 
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -11,7 +12,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.musicandvideo.R;
 import com.example.musicandvideo.databinding.ActivityMainBinding;
-import com.example.musicandvideo.model.PlayerModel;
 import com.example.musicandvideo.view.MainActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -20,31 +20,18 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivityModel extends BaseObservable{
 
 
-    AppBarMainModel appBarMainModel = null;
-    PlayerModel playerModel = null;
+    boolean selectedMusic = true;
+    public static final String TAG = "MainActivityModel";
 
     private MainActivity context = null;
     public MainActivityModel(MainActivity context){
         this.context = context;
     }
 
-    @Bindable
-    public AppBarMainModel getAppBarMainModel(){
-        return appBarMainModel;
-    }
 
-    public void setAppBarMainModel(AppBarMainModel appBarMainModel){
-        this.appBarMainModel = appBarMainModel;
-    }
-
-    public void init(ActivityMainBinding binding, PlayerModel playerModel){
-        this.playerModel = playerModel;
+    public void init(ActivityMainBinding binding ){
         Toolbar toolbar = binding.appBarMain.toolbar;
         context.setSupportActionBar(toolbar);
-
-
-        this.appBarMainModel = new AppBarMainModel(this.context);
-        this.appBarMainModel.init(this.playerModel);
 
         FloatingActionButton fab = binding.appBarMain.fab;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,5 +48,31 @@ public class MainActivityModel extends BaseObservable{
                 context, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    @Bindable
+    public boolean getSelectedMusic(){
+        return selectedMusic;
+    }
+
+    public void setSelectedMusic(boolean selectedMusic){
+        this.selectedMusic = selectedMusic;
+    }
+
+    public void onMusicClick(View view){
+
+        if(!this.selectedMusic){
+            this.selectedMusic = true;
+            notifyPropertyChanged(com.example.musicandvideo.BR.selectedMusic);
+        }
+        Log.i(TAG, "onMusicClick:"+this.selectedMusic);
+    }
+
+    public void onVideoClick(View view){
+        if(this.selectedMusic){
+            this.selectedMusic = false;
+            notifyPropertyChanged(com.example.musicandvideo.BR.selectedMusic);
+        }
+        Log.i(TAG, "onVideoClick:"+this.selectedMusic);
     }
 }

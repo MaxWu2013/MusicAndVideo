@@ -4,15 +4,6 @@
     xmlns:bind="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="appbarMainModel"
-            type="com.example.musicandvideo.viewmodel.AppBarMainModel" />
-        <variable
-            name="playerModel"
-            type="com.example.musicandvideo.model.PlayerModel" />
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,8 +25,7 @@
 
         <include
             android:id="@+id/contentMainLayout"
-            layout="@layout/content_main"
-            bind:contentMainModel="@{appbarMainModel.contentMainModel}"/>
+            layout="@layout/content_main" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

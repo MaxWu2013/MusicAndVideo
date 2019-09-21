@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicandvideo.R;
 
@@ -30,6 +34,7 @@ public class PlayListFragment extends Fragment {
     private String mParam2;
 
     private View mFragmentView;
+    private RecyclerView mRecycleView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,6 +61,19 @@ public class PlayListFragment extends Fragment {
         return fragment;
     }
 
+    private void initViews(){
+        mRecycleView = mFragmentView.findViewById(R.id.play_list_recycleview);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycleView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        mRecycleView.setItemAnimator(new DefaultItemAnimator());
+        mRecycleView.setNestedScrollingEnabled(false);
+
+    }
+    private void clearViews(){
+        mFragmentView = null;
+        mRecycleView = null;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +87,13 @@ public class PlayListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mFragmentView = inflater.inflate(R.layout.fragment_play_list, container, false);
+        initViews();
         return mFragmentView;
     }
 
     @Override
     public void onDestroyView() {
-        mFragmentView = null;
+        clearViews();
         super.onDestroyView();
     }
 

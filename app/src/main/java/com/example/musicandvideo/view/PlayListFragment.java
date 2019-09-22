@@ -35,6 +35,7 @@ public class PlayListFragment extends Fragment {
 
     private View mFragmentView;
     private RecyclerView mRecycleView;
+    private PlayListAdapter mAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,11 +63,14 @@ public class PlayListFragment extends Fragment {
     }
 
     private void initViews(){
+        mAdapter = new PlayListAdapter();
+
         mRecycleView = mFragmentView.findViewById(R.id.play_list_recycleview);
         mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycleView.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
         mRecycleView.setItemAnimator(new DefaultItemAnimator());
         mRecycleView.setNestedScrollingEnabled(false);
+        mRecycleView.setAdapter(mAdapter);
 
     }
     private void clearViews(){
@@ -135,4 +139,13 @@ public class PlayListFragment extends Fragment {
         // TODO: Update argument type and name
         void onPlayListFragmentInteraction(Uri uri);
     }
+
+    public void switchToAudioList(){
+        mAdapter.switchToAudio();
+    }
+
+    public void switchToVideoList(){
+        mAdapter.switchToVideo();
+    }
+
 }

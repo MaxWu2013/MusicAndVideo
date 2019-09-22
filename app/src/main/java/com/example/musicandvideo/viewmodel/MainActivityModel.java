@@ -9,10 +9,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.musicandvideo.R;
 import com.example.musicandvideo.databinding.ActivityMainBinding;
 import com.example.musicandvideo.view.MainActivity;
+import com.example.musicandvideo.view.PlayListFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -23,15 +25,15 @@ public class MainActivityModel extends BaseObservable{
     boolean selectedMusic = true;
     public static final String TAG = "MainActivityModel";
 
-    private MainActivity context = null;
+    private MainActivity mainActivity = null;
     public MainActivityModel(MainActivity context){
-        this.context = context;
+        this.mainActivity = context;
     }
 
 
     public void init(ActivityMainBinding binding ){
         Toolbar toolbar = binding.appBarMain.toolbar;
-        context.setSupportActionBar(toolbar);
+        mainActivity.setSupportActionBar(toolbar);
 
         FloatingActionButton fab = binding.appBarMain.fab;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +47,7 @@ public class MainActivityModel extends BaseObservable{
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                context, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                mainActivity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
@@ -66,6 +68,11 @@ public class MainActivityModel extends BaseObservable{
             notifyPropertyChanged(com.example.musicandvideo.BR.selectedMusic);
         }
         Log.i(TAG, "onMusicClick:"+this.selectedMusic);
+        //need to notify PlayListFragment to refresh UI
+
+        FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
+        PlayListFragment fragment = (PlayListFragment) fragmentManager.findFragmentByTag(PlayListFragment.class.getName());
+        fragment.switchToAudioList();
     }
 
     public void onVideoClick(View view){
@@ -74,5 +81,9 @@ public class MainActivityModel extends BaseObservable{
             notifyPropertyChanged(com.example.musicandvideo.BR.selectedMusic);
         }
         Log.i(TAG, "onVideoClick:"+this.selectedMusic);
+
+        FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
+        PlayListFragment fragment = (PlayListFragment) fragmentManager.findFragmentByTag(PlayListFragment.class.getName());
+        fragment.switchToVideoList();
     }
 }

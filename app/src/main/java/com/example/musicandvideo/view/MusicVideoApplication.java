@@ -1,4 +1,13 @@
 package com.example.musicandvideo.view;
 
-public class MusicVideoApplication {
+import android.app.Application;
+
+import com.example.musicandvideo.testData.Test;
+
+public class MusicVideoApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Test.initTestingData();
+    }
 }

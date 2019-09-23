@@ -1,6 +1,7 @@
 package com.example.musicandvideo.viewmodel;
 
 
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
@@ -10,11 +11,13 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.musicandvideo.R;
 import com.example.musicandvideo.databinding.ActivityMainBinding;
 import com.example.musicandvideo.view.MainActivity;
 import com.example.musicandvideo.view.PlayListFragment;
+import com.example.musicandvideo.view.PlayScreenFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -72,6 +75,18 @@ public class MainActivityModel extends BaseObservable{
 
         FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
         PlayListFragment fragment = (PlayListFragment) fragmentManager.findFragmentByTag(PlayListFragment.class.getName());
+        if(null == fragment){
+            fragment = PlayListFragment.newInstance(null,null);
+            FragmentTransaction transaction= fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
+        }else{
+            if(!fragment.isVisible()){
+                fragmentManager.popBackStack();
+            }
+
+        }
         fragment.switchToAudioList();
     }
 
@@ -84,6 +99,31 @@ public class MainActivityModel extends BaseObservable{
 
         FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
         PlayListFragment fragment = (PlayListFragment) fragmentManager.findFragmentByTag(PlayListFragment.class.getName());
+        if(null == fragment){
+            fragment = PlayListFragment.newInstance(null,null);
+            FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }else{
+            if(!fragment.isVisible()){
+                fragmentManager.popBackStack();
+            }
+        }
         fragment.switchToVideoList();
+    }
+
+    public void switchToPlayerFragment(Uri uri){
+        FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
+        PlayScreenFragment playScreenFragment = (PlayScreenFragment) fragmentManager.findFragmentByTag(PlayScreenFragment.class.getName());
+        if(null == playScreenFragment){
+            playScreenFragment =  PlayScreenFragment.newInstance(null,null);
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragmentContainer,playScreenFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            Log.i(TAG," switchToPlayerFragment yes");
+        }else{
+            Log.i(TAG," switchToPlayerFragment xxxxx");
+        }
     }
 }

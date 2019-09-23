@@ -20,6 +20,11 @@ import java.util.ArrayList;
 
 public class PlayListAdapter extends RecyclerView.Adapter {
 
+    public interface OnItemClickListener{
+         void onItemCLick(View view, MediaFile mediaFile);
+    }
+
+
     public class PlayListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final String TAG = "PlayListViewHolder";
         private final ViewDataBinding binding;
@@ -40,15 +45,17 @@ public class PlayListAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View view) {
             Log.i(TAG,mMediaFile.getSrc());
+            mOnItemClickListener.onItemCLick(view,mMediaFile);
         }
     }
 
 
     private ArrayList<MediaFile> mList = Test.MusicList;
     private FileType mFileType = FileType.AUDIO;
+    private OnItemClickListener mOnItemClickListener;
 
-    public PlayListAdapter() {
-
+    public PlayListAdapter(OnItemClickListener listener) {
+        mOnItemClickListener = listener;
     }
 
     @NonNull

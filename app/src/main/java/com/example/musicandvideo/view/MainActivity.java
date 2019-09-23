@@ -2,6 +2,7 @@ package com.example.musicandvideo.view;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,10 +16,12 @@ import com.example.musicandvideo.databinding.ActivityMainBinding;
 import com.example.musicandvideo.viewmodel.MainActivityModel;
 
 public class MainActivity extends AppCompatActivity implements
-        PlayListFragment.OnFragmentInteractionListener{
+        PlayListFragment.OnFragmentInteractionListener,
+        PlayScreenFragment.OnPlayScreenFragmentInteractionListener {
 
     private ActivityMainBinding binding;
     private MainActivityModel mainActivityMode;
+    private String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +49,13 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -68,6 +65,18 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onPlayListFragmentInteraction(Uri uri) {
+        if(null != uri){
+            String url = uri.toString();
+            Log.i(TAG,"url:"+url);
+            mainActivityMode.switchToPlayerFragment(uri);
+        }
+    }
 
+    @Override
+    public void onPlayScreenFragmentInteraction(Uri uri) {
+        if(null != uri){
+            String url = uri.toString();
+            Log.i(TAG,"url:"+url);
+        }
     }
 }

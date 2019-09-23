@@ -13,7 +13,13 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="track_selection_title">Select tracks</string>
+    <string name="exo_download_notification_channel_name">Downloads</string>
+    <string name="download_playlist_unsupported">This demo app does not support downloading playlists</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="download_drm_unsupported">This demo app does not support downloading protected content</string>
+
+    <string name="download_scheme_unsupported">This demo app only supports downloading http streams</string>
+
+    <string name="download_start_error">Failed to start download</string>
 </resources>

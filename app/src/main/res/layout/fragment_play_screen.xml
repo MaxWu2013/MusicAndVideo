@@ -13,12 +13,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.exoplayer2.ui.AspectRatioFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/exo_content_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:keepScreenOn="true">
+    android:layout_gravity="center"
+    app:surface_type="texture_view">
 
     <com.google.android.exoplayer2.ui.PlayerView android:id="@+id/player_view"
         android:layout_width="match_parent"
@@ -54,4 +57,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</com.google.android.exoplayer2.ui.AspectRatioFrameLayout>

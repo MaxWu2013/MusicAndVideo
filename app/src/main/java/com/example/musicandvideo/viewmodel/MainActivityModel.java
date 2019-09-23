@@ -1,6 +1,7 @@
 package com.example.musicandvideo.viewmodel;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -78,7 +79,6 @@ public class MainActivityModel extends BaseObservable{
         if(null == fragment){
             fragment = PlayListFragment.newInstance(null,null);
             FragmentTransaction transaction= fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment);
-            transaction.addToBackStack(null);
             transaction.commit();
 
         }else{
@@ -102,7 +102,6 @@ public class MainActivityModel extends BaseObservable{
         if(null == fragment){
             fragment = PlayListFragment.newInstance(null,null);
             FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment);
-            transaction.addToBackStack(null);
             transaction.commit();
         }else{
             if(!fragment.isVisible()){
@@ -116,7 +115,16 @@ public class MainActivityModel extends BaseObservable{
         FragmentManager fragmentManager = mainActivity.getSupportFragmentManager();
         PlayScreenFragment playScreenFragment = (PlayScreenFragment) fragmentManager.findFragmentByTag(PlayScreenFragment.class.getName());
         if(null == playScreenFragment){
-            playScreenFragment =  PlayScreenFragment.newInstance(null,null);
+            Intent intent = new Intent(mainActivity,mainActivity.getClass());
+            intent.putExtra(PlayScreenFragment.ABR_ALGORITHM_EXTRA,PlayScreenFragment.ABR_ALGORITHM_DEFAULT);
+            intent.putExtra(PlayScreenFragment.PREFER_EXTENSION_DECODERS_EXTRA,false);
+            intent.setData(uri);
+//            intent.putExtra(PlayScreenFragment.EXTENSION_EXTRA, extension)
+//            intent.putExtra(PlayScreenFragment.AD_TAG_URI_EXTRA, null)
+            intent.putExtra(PlayScreenFragment.SPHERICAL_STEREO_MODE_EXTRA, PlayScreenFragment.SPHERICAL_STEREO_MODE_MONO);
+            intent.setAction(PlayScreenFragment.ACTION_VIEW);
+
+            playScreenFragment =  PlayScreenFragment.newInstance(null,intent);
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.fragmentContainer,playScreenFragment);
             transaction.addToBackStack(null);

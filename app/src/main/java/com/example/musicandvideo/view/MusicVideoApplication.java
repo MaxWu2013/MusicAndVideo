@@ -49,6 +49,7 @@ public class MusicVideoApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Test.initTestingData();
+        userAgent = Util.getUserAgent(this, "MusicAndVideo");
     }
 
     /** Returns a {@link DataSource.Factory}. */
